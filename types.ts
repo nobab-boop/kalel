@@ -28,8 +28,3 @@ export interface BookingFormData {
   time: string;
   instructions: string;
 }
-
-export interface ChatMessage {
-  role: 'user' | 'model';
-  text: string;
-}
