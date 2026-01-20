@@ -453,7 +453,7 @@ export const Home: React.FC = () => {
                     >
                         <button
                             onClick={() => toggleFaq(index)}
-                            className="w-full px-8 py-6 flex items-center justify-between text-left focus:outline-none"
+                            className="w-full px-6 md:px-8 py-6 flex items-center justify-between text-left focus:outline-none"
                         >
                             <span className={`text-xl md:text-2xl font-bold transition-colors ${openFaqIndex === index ? 'text-brand-600' : 'text-slate-900'}`}>
                                 {faq.question}
@@ -466,8 +466,8 @@ export const Home: React.FC = () => {
                         </button>
                         
                         <div 
-                            className={`px-8 overflow-hidden transition-all duration-300 ease-in-out ${
-                                openFaqIndex === index ? 'max-h-60 opacity-100 pb-8' : 'max-h-0 opacity-0'
+                            className={`px-6 md:px-8 overflow-hidden transition-all duration-300 ease-in-out ${
+                                openFaqIndex === index ? 'max-h-[600px] opacity-100 pb-8' : 'max-h-0 opacity-0'
                             }`}
                         >
                             <p className="text-slate-700 text-lg leading-relaxed border-t border-slate-100 pt-6">
