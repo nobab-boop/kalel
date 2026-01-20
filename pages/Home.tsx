@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star, CheckCircle, Calendar, MousePointerClick, Leaf, Facebook, MapPin, ChevronDown, ChevronUp, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Star, CheckCircle, Calendar, MousePointerClick, Leaf, Facebook, MapPin, ChevronDown, ChevronUp } from 'lucide-react';
 import { SERVICES, TESTIMONIALS, WHY_CHOOSE_US, FAQS, SERVICE_AREAS_LIST } from '../constants';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -348,9 +348,9 @@ export const Home: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {WHY_CHOOSE_US.map((item, index) => (
+            {WHY_CHOOSE_US.map((item) => (
               <div 
-                key={index} 
+                key={item.title} 
                 className="p-6 rounded-2xl bg-brand-50 border border-brand-100 flex flex-row items-start gap-5 why-us-card-anim group hover:bg-white hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
               >
                 <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center text-brand-500 shadow-sm shrink-0 border border-brand-100 group-hover:scale-110 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">

@@ -1,6 +1,5 @@
-import React from 'react';
 import { 
-  Home, Briefcase, Sparkles, Truck, Box, ShieldCheck, Clock, UserCheck, 
+  Home, Briefcase, ShieldCheck, Clock, UserCheck, 
   Leaf, Headphones, Users, CalendarClock, Sliders,
   Waves, Umbrella, Footprints, AlignJustify, CloudRain, Layers, Package
 } from 'lucide-react';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet, Link } from 'react-router-dom';
-import { Menu, X, Phone, Facebook, Instagram, Twitter, MapPin, Mail, ArrowRight, Lock } from 'lucide-react';
+import { Menu, X, Phone, Facebook, MapPin, Mail, ArrowRight, Lock } from 'lucide-react';
 
 export const Layout: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
