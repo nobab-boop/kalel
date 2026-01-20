@@ -265,3 +265,4 @@ export const Booking: React.FC = () => {
       </div>
     </div>
   );
+};
