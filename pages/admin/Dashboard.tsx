@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { LogOut, Search, Filter, Phone, Mail, Calendar, CheckCircle, Clock, AlertCircle, Home, ShieldCheck, Trash2, X } from 'lucide-react';
+import { LogOut, Search, Filter, Phone, Mail, Calendar, CheckCircle, Clock, AlertCircle, Home, ShieldCheck, Trash2, X, Download } from 'lucide-react';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import { SERVICES } from '../../constants';
 
 interface Lead {
@@ -90,6 +92,56 @@ export const AdminDashboard: React.FC = () => {
       case 'Completed': return 'bg-slate-100 text-slate-800';
       default: return 'bg-gray-100 text-gray-800';
     }
+  };
+
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+    
+    // Header
+    doc.setFontSize(22);
+    doc.setTextColor(14, 165, 233); // Brand color #0ea5e9
+    doc.text("KL Softwash LLC", 14, 20);
+    
+    doc.setFontSize(11);
+    doc.setTextColor(100);
+    doc.text(`Leads Report - Generated on ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}`, 14, 30);
+    
+    if (filter !== 'All') {
+        doc.text(`Filter: ${filter} Status Only`, 14, 36);
+    }
+
+    // Table
+    const tableColumn = ["Date", "Status", "Name", "Service", "Phone", "Email", "Details"];
+    const tableRows = filteredLeads.map(lead => [
+        new Date(lead.date).toLocaleDateString(),
+        lead.status,
+        lead.name,
+        getServiceTitle(lead.serviceType),
+        lead.phone,
+        lead.email,
+        lead.instructions || '-'
+    ]);
+
+    autoTable(doc, {
+        head: [tableColumn],
+        body: tableRows,
+        startY: filter !== 'All' ? 42 : 38,
+        theme: 'grid',
+        headStyles: { fillColor: [14, 165, 233] },
+        styles: { fontSize: 8, cellPadding: 2 },
+        columnStyles: {
+            0: { cellWidth: 20 }, // Date
+            1: { cellWidth: 20 }, // Status
+            2: { cellWidth: 25 }, // Name
+            3: { cellWidth: 30 }, // Service
+            4: { cellWidth: 25 }, // Phone
+            5: { cellWidth: 35 }, // Email
+            6: { cellWidth: 'auto' } // Details
+        }
+    });
+
+    const fileName = `KL_Softwash_Leads_${new Date().toISOString().split('T')[0]}.pdf`;
+    doc.save(fileName);
   };
 
   return (
@@ -220,21 +272,32 @@ export const AdminDashboard: React.FC = () => {
         <div className="bg-white rounded-xl shadow-sm border border-slate-200">
           {/* Table Header */}
           <div className="px-6 py-4 border-b border-slate-200">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <h2 className="text-lg font-semibold text-slate-900">Recent Booking Requests</h2>
-              <div className="relative">
-                <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                <select
-                  value={filter}
-                  onChange={(e) => setFilter(e.target.value)}
-                  className="pl-9 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+              <div className="flex items-center gap-3 w-full sm:w-auto">
+                 <button 
+                    onClick={exportToPDF}
+                    className="flex items-center justify-center gap-2 px-4 py-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-lg transition-colors text-sm font-medium shadow-sm hover:shadow"
+                    title="Download leads as PDF"
                 >
-                  <option value="All">All Status</option>
-                  <option value="New">New</option>
-                  <option value="Contacted">Contacted</option>
-                  <option value="Booked">Booked</option>
-                  <option value="Completed">Completed</option>
-                </select>
+                    <Download className="w-4 h-4" />
+                    <span className="hidden sm:inline">Export PDF</span>
+                    <span className="sm:hidden">Export</span>
+                </button>
+                <div className="relative flex-1 sm:flex-none">
+                  <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <select
+                    value={filter}
+                    onChange={(e) => setFilter(e.target.value)}
+                    className="w-full sm:w-auto pl-9 pr-8 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+                  >
+                    <option value="All">All Status</option>
+                    <option value="New">New</option>
+                    <option value="Contacted">Contacted</option>
+                    <option value="Booked">Booked</option>
+                    <option value="Completed">Completed</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
