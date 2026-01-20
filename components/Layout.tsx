@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet, Link } from 'react-router-dom';
 import { Menu, X, Phone, Facebook, Instagram, Twitter, MapPin, Mail, ArrowRight, Lock } from 'lucide-react';
-import { ChatAssistant } from './ChatAssistant';
 
 export const Layout: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -137,8 +136,6 @@ export const Layout: React.FC = () => {
       <main className="flex-grow">
         <Outlet />
       </main>
-
-      <ChatAssistant />
 
       <footer className="bg-slate-900 text-slate-300 py-12">
         <div className="container mx-auto px-4">
