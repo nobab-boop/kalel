@@ -301,7 +301,7 @@ export const Home: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {SERVICES.slice(0, 4).map((service, index) => (
+            {SERVICES.slice(0, 4).map((service) => (
               <div 
                 key={service.id} 
                 className="bg-brand-50 border border-brand-100 rounded-2xl shadow-sm pop-up-card flex flex-col overflow-hidden service-card-anim group"
@@ -504,8 +504,8 @@ export const Home: React.FC = () => {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-             {SERVICE_AREAS_LIST.map((area, index) => (
-               <div key={index} className="bg-brand-800/50 backdrop-blur-sm border border-brand-700 p-4 rounded-xl flex items-center justify-center gap-2 hover:bg-brand-700 transition-colors group">
+             {SERVICE_AREAS_LIST.map((area) => (
+               <div key={area} className="bg-brand-800/50 backdrop-blur-sm border border-brand-700 p-4 rounded-xl flex items-center justify-center gap-2 hover:bg-brand-700 transition-colors group">
                   <MapPin className="w-4 h-4 text-brand-400 group-hover:text-white transition-colors" />
                   <span className="font-semibold">{area}</span>
                </div>
