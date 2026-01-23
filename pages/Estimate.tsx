@@ -337,8 +337,6 @@ const calculateEstimate = (form: EstimateForm) => {
   
   let base = baseRates[form.propertyType];
 
-  // Removed unreachable 'Commercial' check
-
   total += base;
 
   // 2. Room Add-ons
@@ -523,12 +521,12 @@ export const Estimate: React.FC = () => {
 
       <div>
         <label className="block text-sm font-bold text-slate-700 mb-2">Building Type</label>
-        <div className="flex gap-4">
+        <div className="grid grid-cols-3 gap-2 md:gap-4">
           {['Flat', 'House', 'Commercial'].map((type) => (
             <button
               key={type}
               onClick={() => update('buildingType', type)}
-              className={`flex-1 py-3 px-4 rounded-xl border font-medium text-sm flex items-center justify-center gap-2 transition-all ${
+              className={`py-3 px-2 md:px-4 rounded-xl border font-medium text-sm flex flex-col md:flex-row items-center justify-center gap-2 transition-all ${
                 formData.buildingType === type 
                 ? 'bg-brand-50 text-brand-700 border-brand-500 ring-1 ring-brand-500' 
                 : 'bg-white text-slate-600 border-slate-200 hover:border-brand-300'
@@ -607,12 +605,12 @@ export const Estimate: React.FC = () => {
           { label: 'Hallways / Stairs', key: 'hallways', icon: <LayoutGrid className="w-5 h-5" /> },
           { label: 'Utility / Storage', key: 'utilityRooms', icon: <Box className="w-5 h-5" /> },
         ].map((room) => (
-          <div key={room.key} className="bg-white p-4 rounded-xl border border-slate-200 flex items-center justify-between">
+          <div key={room.key} className="bg-white p-4 rounded-xl border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
             <div className="flex items-center gap-3">
               <div className="text-slate-400">{room.icon}</div>
               <span className="font-bold text-slate-700">{room.label}</span>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
               <button 
                 onClick={() => update(room.key as keyof EstimateForm, Math.max(0, (formData[room.key as keyof EstimateForm] as number) - 1))}
                 className="w-8 h-8 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center justify-center font-bold"
@@ -1476,7 +1474,7 @@ export const Estimate: React.FC = () => {
             <Calculator className="w-10 h-10 text-brand-600" />
         </div>
         <h2 className="text-3xl font-black text-slate-900 mb-2">Estimated Price Range</h2>
-        <div className="flex items-center justify-center gap-2 text-5xl font-black text-brand-600 mb-4 tracking-tight">
+        <div className="flex items-center justify-center gap-2 text-4xl sm:text-5xl font-black text-brand-600 mb-4 tracking-tight">
             <span>£{estimatedPrice.min}</span>
             <span className="text-slate-300">-</span>
             <span>£{estimatedPrice.max}</span>
@@ -1496,7 +1494,7 @@ export const Estimate: React.FC = () => {
             }
         </p>
 
-        <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-left max-w-2xl mx-auto mb-8">
+        <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 sm:p-4 text-left max-w-2xl mx-auto mb-8">
             <div className="flex gap-3">
                 <AlertTriangle className="w-5 h-5 text-yellow-600 shrink-0" />
                 <div>
@@ -1605,7 +1603,7 @@ export const Estimate: React.FC = () => {
   // --- Main Layout ---
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 md:py-20">
+    <div className="min-h-screen bg-slate-50 py-8 md:py-20">
       <div className="container mx-auto px-4 max-w-4xl">
         
         {/* Header */}
@@ -1619,7 +1617,7 @@ export const Estimate: React.FC = () => {
         </div>
 
         {/* Wizard Container */}
-        <div className="bg-white rounded-3xl shadow-xl border border-brand-100 overflow-hidden relative min-h-[500px] flex flex-col">
+        <div className="bg-white rounded-3xl shadow-xl border border-brand-100 overflow-hidden relative min-h-[400px] md:min-h-[500px] flex flex-col">
            
            {/* Progress Bar */}
            <div className="bg-slate-100 h-2 w-full">
@@ -1630,13 +1628,13 @@ export const Estimate: React.FC = () => {
            </div>
 
            {/* Step Content */}
-           <div className="flex-grow p-6 md:p-10">
+           <div className="flex-grow p-4 md:p-10">
                {renderStepContent()}
            </div>
 
            {/* Footer Navigation */}
            {step < totalSteps && (
-             <div className="p-6 md:p-10 border-t border-slate-100 bg-slate-50 flex items-center justify-between">
+             <div className="p-4 md:p-10 border-t border-slate-100 bg-slate-50 flex items-center justify-between">
                 <button 
                   onClick={prevStep}
                   disabled={step === 1}
@@ -1645,7 +1643,7 @@ export const Estimate: React.FC = () => {
                   <ChevronLeft className="w-5 h-5" /> Back
                 </button>
                 
-                <div className="text-sm font-medium text-slate-400">
+                <div className="text-sm font-medium text-slate-400 hidden sm:block">
                    Step {step} of {totalSteps}
                 </div>
 
