@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet, Link } from 'react-router-dom';
-import { Menu, X, Phone, Facebook, MapPin, Mail, ArrowRight, Lock } from 'lucide-react';
+import { Menu, X, Phone, Facebook, MapPin, Mail, ArrowRight, Lock, Calculator } from 'lucide-react';
 
 export const Layout: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -54,7 +54,7 @@ export const Layout: React.FC = () => {
                   key={link.path}
                   to={link.path}
                   className={({ isActive }) =>
-                    `text-base font-bold transition-colors hover:text-brand-500 ${
+                    `text-base font-bold transition-colors hover:text-brand-500 flex items-center gap-1 ${
                       isActive ? 'text-brand-600' : 'text-slate-600'
                     }`
                   }
@@ -62,6 +62,21 @@ export const Layout: React.FC = () => {
                   {link.name}
                 </NavLink>
               ))}
+              
+              {/* Highlighted Calculator Link */}
+              <NavLink 
+                to="/estimate"
+                className={({ isActive }) => 
+                  `flex items-center gap-1 text-sm font-bold px-3 py-1.5 rounded-full border border-brand-200 transition-all ${
+                    isActive 
+                      ? 'bg-brand-50 text-brand-600 border-brand-300' 
+                      : 'text-slate-600 hover:text-brand-600 hover:border-brand-300'
+                  }`
+                }
+              >
+                <Calculator className="w-4 h-4" /> AI Price Estimation
+              </NavLink>
+
               <div className="flex items-center gap-3 ml-4">
                 <a 
                    href="tel:+12395376973" 
@@ -81,7 +96,7 @@ export const Layout: React.FC = () => {
                     to="/contact"
                     className="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
                 >
-                    Free Estimate
+                    Free Quote
                 </Link>
               </div>
             </div>
@@ -105,7 +120,7 @@ export const Layout: React.FC = () => {
                 to={link.path}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={({ isActive }) =>
-                  `block text-lg font-medium p-2 rounded-lg ${
+                  `block text-lg font-medium p-2 rounded-lg flex items-center gap-2 ${
                     isActive ? 'bg-brand-50 text-brand-600' : 'text-slate-600'
                   }`
                 }
@@ -113,6 +128,18 @@ export const Layout: React.FC = () => {
                 {link.name}
               </NavLink>
             ))}
+             <NavLink
+                to="/estimate"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={({ isActive }) =>
+                  `block text-lg font-medium p-2 rounded-lg flex items-center gap-2 ${
+                    isActive ? 'bg-brand-50 text-brand-600' : 'text-slate-600'
+                  }`
+                }
+              >
+                <Calculator className="w-5 h-5" /> AI Price Estimation
+              </NavLink>
+
             <div className="flex flex-col gap-3 mt-4">
                  <a 
                    href="tel:+12395376973" 
@@ -126,7 +153,7 @@ export const Layout: React.FC = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="bg-brand-500 text-white px-4 py-3 rounded-xl text-center font-bold shadow-md"
                 >
-                Free Estimate
+                Free Quote
                 </Link>
             </div>
           </div>
@@ -157,7 +184,7 @@ export const Layout: React.FC = () => {
               <ul className="space-y-2 text-sm">
                 <li><Link to="/about" className="hover:text-brand-400 transition">About Us</Link></li>
                 <li><Link to="/services" className="hover:text-brand-400 transition">Our Services</Link></li>
-                <li><Link to="/contact" className="hover:text-brand-400 transition">Book Now</Link></li>
+                <li><Link to="/estimate" className="hover:text-brand-400 transition">Price Estimator</Link></li>
                 <li><Link to="/contact" className="hover:text-brand-400 transition">Contact</Link></li>
               </ul>
             </div>

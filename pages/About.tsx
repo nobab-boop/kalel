@@ -10,6 +10,7 @@ export const About: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // General header animation
       gsap.from(".about-header > *", {
         y: 30,
         opacity: 0,
@@ -18,30 +19,35 @@ export const About: React.FC = () => {
         ease: "power3.out"
       });
 
-      gsap.from(".about-image", {
-        scrollTrigger: {
-          trigger: ".about-content",
-          start: "top 75%",
-        },
-        x: -50,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out"
-      });
+      // Media query-based animations
+      // We disable the image slide-in on mobile to prevent visibility issues
+      // if the trigger fires improperly or elements are stacked
+      const mm = gsap.matchMedia();
 
-      gsap.from(".about-text", {
-        scrollTrigger: {
-          trigger: ".about-content",
-          start: "top 75%",
-        },
-        x: 50,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-        delay: 0.2
-      });
+      mm.add("(min-width: 768px)", () => {
+          gsap.from(".about-image", {
+            scrollTrigger: {
+              trigger: ".about-content",
+              start: "top 75%",
+            },
+            x: -50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+          });
 
-      // Value Cards animation removed to fix visibility issue
+          gsap.from(".about-text", {
+            scrollTrigger: {
+              trigger: ".about-content",
+              start: "top 75%",
+            },
+            x: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out",
+            delay: 0.2
+          });
+      });
       
     }, containerRef);
 

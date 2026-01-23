@@ -530,7 +530,7 @@ export const Home: React.FC = () => {
             to="/contact"
             className="bg-brand-600 text-white px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-brand-700 transition transform hover:-translate-y-1 inline-block"
           >
-            Get My Free Estimate
+            Get My Free Quote
           </Link>
         </div>
       </section>

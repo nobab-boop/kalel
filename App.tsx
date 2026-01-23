@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { Services } from './pages/Services';
 import { About } from './pages/About';
 import { Contact } from './pages/Contact';
+import { Estimate } from './pages/Estimate';
 import { AdminLogin } from './pages/admin/Login';
 import { AdminDashboard } from './pages/admin/Dashboard';
 import { AdminForgotPassword } from './pages/admin/ForgotPassword';
@@ -21,6 +22,7 @@ const App: React.FC = () => {
           <Route path="services" element={<Services />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="estimate" element={<Estimate />} />
         </Route>
 
         {/* Admin Routes - No Layout */}
