@@ -337,7 +337,8 @@ const calculateEstimate = (form: EstimateForm) => {
   
   let base = baseRates[form.propertyType];
 
-  // Adjust Base based on Service Type
+  // Removed unreachable 'Commercial' check
+
   total += base;
 
   // 2. Room Add-ons
