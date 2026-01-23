@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { 
   Calculator, ArrowRight, CheckCircle, AlertTriangle, 
   Home, Building, Briefcase, ChevronLeft, ChevronRight,
-  Box, Truck, Armchair, Utensils, Bed, Bath, LayoutGrid, 
-  Car, MapPin, Sparkles, Dog, Mail, Phone, User, AlertCircle,
-  Clock, Store, Trash2, Sliders, Key, Plus
+  Box, Armchair, Utensils, Bed, Bath, LayoutGrid, 
+  Dog, Mail, Phone, User, AlertCircle,
+  Sliders, Plus
 } from 'lucide-react';
 
 // --- Types & Constants ---
@@ -338,9 +338,6 @@ const calculateEstimate = (form: EstimateForm) => {
   let base = baseRates[form.propertyType];
 
   // Adjust Base based on Service Type
-  // Regular/EoT are now handled above, this is fallback
-  if (form.cleaningType === 'Commercial') base *= 1.2; 
-
   total += base;
 
   // 2. Room Add-ons
